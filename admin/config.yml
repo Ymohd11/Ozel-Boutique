@@ -1,0 +1,39 @@
+backend:
+  name: git-gateway
+  branch: main
+
+media_folder: "assets/products"
+public_folder: "/assets/products"
+
+site_url: https://YOUR-SITE-NAME.netlify.app
+display_url: https://YOUR-SITE-NAME.netlify.app
+
+collections:
+  - name: "products"
+    label: "Products"
+    files:
+      - name: "catalog"
+        label: "Product Catalog"
+        file: "data/products.json"
+        fields:
+          - label: "Products"
+            name: "products"
+            widget: "list"
+            summary: "{{name_en}} — {{color_en}}"
+            fields:
+              - { label: "ID (unique, no spaces)", name: "id", widget: "string" }
+              - label: "Category"
+                name: "category"
+                widget: "select"
+                options: ["shirts", "pants"]
+              - { label: "Swatch color (hex)", name: "swatch", widget: "color" }
+              - { label: "Price (BD)", name: "price", widget: "number", value_type: "float" }
+              - { label: "Photo", name: "image", widget: "image" }
+              - { label: "Name (English)", name: "name_en", widget: "string" }
+              - { label: "Name (Arabic)", name: "name_ar", widget: "string" }
+              - { label: "Color (English)", name: "color_en", widget: "string" }
+              - { label: "Color (Arabic)", name: "color_ar", widget: "string" }
+              - { label: "Fabric description (English)", name: "fabric_en", widget: "text" }
+              - { label: "Fabric description (Arabic)", name: "fabric_ar", widget: "text" }
+              - { label: "Care instructions (English)", name: "care_en", widget: "text" }
+              - { label: "Care instructions (Arabic)", name: "care_ar", widget: "text" }

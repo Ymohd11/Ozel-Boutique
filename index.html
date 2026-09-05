@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ozel Boutique — Bahraini Menswear</title>
+<meta name="description" content="Ozel Boutique — linen shirts, pants and modern menswear essentials, designed in Bahrain.">
+<link rel="icon" href="assets/logo.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Inter:wght@400;500;600;700&family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<style>.view { display: none; } .view.active { display: block; }</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap">
+    <a href="#/" class="brand">
+      <img id="logo-img" src="assets/logo.jpg" alt="Ozel Boutique">
+      <span>OZEL BOUTIQUE</span>
+    </a>
+    <nav class="main-nav">
+      <a href="#/" data-nav="home" data-t="nav.home">Home</a>
+      <a href="#/shop" data-nav="shop" data-t="nav.shop">Shop</a>
+      <a href="#/shop?category=shirts" data-nav="shop" data-t="nav.shirts">Shirts</a>
+      <a href="#/shop?category=pants" data-nav="shop" data-t="nav.pants">Pants</a>
+    </nav>
+    <div class="header-actions">
+      <div class="lang-toggle" id="lang-toggle">
+        <button data-lang="en">EN</button>
+        <button data-lang="ar">عربي</button>
+      </div>
+      <a href="#/cart" class="cart-link">
+        <span data-t="nav.cart">Cart</span> <span class="cart-count" data-cart-count>0</span>
+      </a>
+      <button class="nav-toggle" aria-label="Open menu">&#9776;</button>
+    </div>
+  </div>
+</header>
+
+<main id="app"></main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <h5>Ozel Boutique</h5>
+        <p class="muted" style="max-width:32ch;" data-t="footer.tagline">Linen menswear designed in Bahrain, made for the Gulf climate.</p>
+      </div>
+      <div>
+        <h5 data-t="footer.shop">Shop</h5>
+        <a href="#/shop" data-t="footer.allProducts">All products</a>
+        <a href="#/shop?category=shirts" data-t="nav.shirts">Shirts</a>
+        <a href="#/shop?category=pants" data-t="nav.pants">Pants</a>
+      </div>
+      <div>
+        <h5 data-t="footer.support">Support</h5>
+        <a href="#" data-t="footer.sizeGuide">Size guide</a>
+        <a href="#" data-t="footer.shippingReturns">Shipping &amp; returns</a>
+        <a href="#" data-t="footer.contact">Contact us</a>
+      </div>
+      <div>
+        <h5 data-t="footer.follow">Follow</h5>
+        <a href="#" data-t="footer.instagram">Instagram</a>
+        <a href="#" data-t="footer.whatsapp">WhatsApp</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span data-t="footer.copyright">&copy; 2026 Ozel Boutique, Bahrain.</span>
+      <span data-t="footer.priceNote">Prices in Bahraini Dinar (BD)</span>
+    </div>
+  </div>
+</footer>
+
+<script src="js/app.js"></script>
+</body>
+</html>
