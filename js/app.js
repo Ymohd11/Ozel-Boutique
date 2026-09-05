@@ -15,7 +15,7 @@ const IMAGES = {
 document.getElementById("logo-img").src = IMAGES.logo;
 
 const SIZES = ["S", "M", "L", "XL", "XXL"];
-const CATEGORIES = ["shirts", "tshirts", "pants", "accessories"];
+let CATEGORIES = [];
 
 /* ---------- Language ---------- */
 let LANG = localStorage.getItem("ozel_lang") || "en";
@@ -140,6 +140,12 @@ async function loadSizeGuide() {
   SIZE_GUIDE = await res.json();
 }
 
+async function loadCategories() {
+  const res = await fetch("data/categories.json");
+  const data = await res.json();
+  CATEGORIES = data.categories || [];
+}
+
 function pName(p) { return p.name[LANG] || p.name.en; }
 function pFabric(p) { return p.fabric[LANG] || p.fabric.en; }
 function pCare(p) { return p.care[LANG] || p.care.en; }
@@ -149,7 +155,9 @@ function getProduct(id) { return PRODUCTS.find(p => p.id === id); }
 function getVariant(p, colorEn) { return p.variants.find(v => v.color.en === colorEn) || p.variants[0]; }
 function variantInStock(v) { return SIZES.some(s => v.stock[s]); }
 function categoryLabel(cat) {
-  return { shirts: t("nav.shirts"), tshirts: t("nav.tshirts"), pants: t("nav.pants"), accessories: t("nav.accessories") }[cat] || cat;
+  const c = CATEGORIES.find(x => x.key === cat);
+  if (!c) return cat;
+  return (LANG === "ar" ? c.label_ar : c.label_en) || c.label_en || cat;
 }
 
 /* ---------- Cart ---------- */
@@ -290,14 +298,12 @@ function viewHome() {
           <a href="#/shop" class="small" style="text-decoration:underline;">${t("cat.viewAll")}</a>
         </div>
         <div class="cat-strip">
-          <a class="cat-tile" href="#/shop?category=shirts">
-            <img src="${IMAGES["green-cream"]}" alt="Linen shirts">
-            <span class="label">${t("cat.shirts")}</span>
-          </a>
-          <a class="cat-tile" href="#/shop?category=pants">
-            <img src="${IMAGES["navy-brown"]}" alt="Linen pants">
-            <span class="label">${t("cat.pants")}</span>
-          </a>
+          ${CATEGORIES.filter(c => c.image).map(c => `
+            <a class="cat-tile" href="#/shop?category=${c.key}">
+              <img src="${c.image}" alt="${categoryLabel(c.key)}">
+              <span class="label">${categoryLabel(c.key)}</span>
+            </a>
+          `).join("")}
           <a class="cat-tile" href="#/shop">
             <img src="${IMAGES["maroon-white"]}" alt="Full collection">
             <span class="label">${t("cat.full")}</span>
@@ -350,7 +356,7 @@ function viewShop(qs) {
             <h4>${t("shop.category")}</h4>
             <div class="filter-group" id="filter-category">
               <label class="filter-option"><input type="radio" name="cat" value="all" ${initialCategory==="all"?"checked":""}> ${t("shop.allProducts")}</label>
-              ${CATEGORIES.map(c => `<label class="filter-option"><input type="radio" name="cat" value="${c}" ${initialCategory===c?"checked":""}> ${categoryLabel(c)}</label>`).join("")}
+              ${CATEGORIES.map(c => `<label class="filter-option"><input type="radio" name="cat" value="${c.key}" ${initialCategory===c.key?"checked":""}> ${categoryLabel(c.key)}</label>`).join("")}
             </div>
             <h4>${t("shop.colour")}</h4>
             <div class="filter-group" id="filter-color">
@@ -726,6 +732,15 @@ function router() {
 }
 
 /* ---------- Language switching ---------- */
+function renderCategoryNav() {
+  const navHtml = CATEGORIES.filter(c => c.show_in_nav !== false)
+    .map(c => `<a href="#/shop?category=${c.key}" data-nav="shop">${categoryLabel(c.key)}</a>`).join("");
+  const navEl = document.getElementById("category-nav");
+  const footerEl = document.getElementById("footer-category-nav");
+  if (navEl) navEl.innerHTML = navHtml;
+  if (footerEl) footerEl.innerHTML = navHtml;
+}
+
 function applyLangChrome() {
   document.documentElement.lang = LANG;
   document.documentElement.dir = LANG === "ar" ? "rtl" : "ltr";
@@ -733,6 +748,7 @@ function applyLangChrome() {
   document.querySelectorAll("#lang-toggle button").forEach(btn => {
     btn.classList.toggle("active", btn.dataset.lang === LANG);
   });
+  renderCategoryNav();
   updateAccountUI();
 }
 
@@ -811,7 +827,8 @@ function initAccount() {
 document.addEventListener("DOMContentLoaded", async () => {
   applyLangChrome();
   initAccount();
-  await Promise.all([loadProducts(), loadSizeGuide()]);
+  await Promise.all([loadProducts(), loadSizeGuide(), loadCategories()]);
+  renderCategoryNav();
   router();
   updateCartCount();
   initHeaderScroll();

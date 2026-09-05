@@ -1,0 +1,8 @@
+{
+  "categories": [
+    { "key": "shirts", "label_en": "Shirts", "label_ar": "قمصان", "image": "assets/products/green-cream.jpg", "show_in_nav": true },
+    { "key": "tshirts", "label_en": "T-Shirts", "label_ar": "تيشيرتات", "image": "", "show_in_nav": true },
+    { "key": "pants", "label_en": "Pants", "label_ar": "بناطيل", "image": "assets/products/navy-brown.jpg", "show_in_nav": true },
+    { "key": "accessories", "label_en": "Accessories", "label_ar": "إكسسوارات", "image": "", "show_in_nav": true }
+  ]
+}
