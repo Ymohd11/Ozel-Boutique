@@ -550,6 +550,14 @@ section { padding: 96px 0; }
 }
 .size-btn:hover { border-color: var(--ink); }
 .size-btn.active { border-color: var(--ink); background: var(--ink); color: var(--white); }
+.size-btn.sold-out {
+  color: #B8B4A8;
+  border-color: var(--line);
+  background: repeating-linear-gradient(135deg, transparent, transparent 4px, var(--line) 4px, var(--line) 5px);
+  cursor: not-allowed;
+}
+.size-btn.sold-out:hover { border-color: var(--line); }
+#account-btn { font-size: 13px; cursor: pointer; white-space: nowrap; }
 
 .qty-row { display: flex; align-items: center; gap: 16px; margin-bottom: 20px; }
 .qty-control {

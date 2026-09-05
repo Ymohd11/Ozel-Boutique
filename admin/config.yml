@@ -5,8 +5,8 @@ backend:
 media_folder: "assets/products"
 public_folder: "/assets/products"
 
-site_url: https://YOUR-SITE-NAME.netlify.app
-display_url: https://YOUR-SITE-NAME.netlify.app
+site_url: https://ozelboutiquebh.netlify.app
+display_url: https://ozelboutiquebh.netlify.app
 
 collections:
   - name: "products"
@@ -19,21 +19,53 @@ collections:
           - label: "Products"
             name: "products"
             widget: "list"
-            summary: "{{name_en}} — {{color_en}}"
+            summary: "{{name_en}} ({{category}})"
             fields:
               - { label: "ID (unique, no spaces)", name: "id", widget: "string" }
               - label: "Category"
                 name: "category"
                 widget: "select"
-                options: ["shirts", "pants"]
-              - { label: "Swatch color (hex)", name: "swatch", widget: "color" }
+                options: ["shirts", "tshirts", "pants", "accessories"]
               - { label: "Price (BD)", name: "price", widget: "number", value_type: "float" }
-              - { label: "Photo", name: "image", widget: "image" }
               - { label: "Name (English)", name: "name_en", widget: "string" }
               - { label: "Name (Arabic)", name: "name_ar", widget: "string" }
-              - { label: "Color (English)", name: "color_en", widget: "string" }
-              - { label: "Color (Arabic)", name: "color_ar", widget: "string" }
               - { label: "Fabric description (English)", name: "fabric_en", widget: "text" }
               - { label: "Fabric description (Arabic)", name: "fabric_ar", widget: "text" }
               - { label: "Care instructions (English)", name: "care_en", widget: "text" }
               - { label: "Care instructions (Arabic)", name: "care_ar", widget: "text" }
+              - label: "Colors / Variants"
+                name: "variants"
+                widget: "list"
+                summary: "{{color_en}}"
+                fields:
+                  - { label: "Color name (English)", name: "color_en", widget: "string" }
+                  - { label: "Color name (Arabic)", name: "color_ar", widget: "string" }
+                  - { label: "Swatch color (hex)", name: "swatch", widget: "color" }
+                  - { label: "Photo", name: "image", widget: "image" }
+                  - label: "Stock by size"
+                    name: "stock"
+                    widget: "object"
+                    fields:
+                      - { label: "S in stock", name: "S", widget: "boolean", default: true }
+                      - { label: "M in stock", name: "M", widget: "boolean", default: true }
+                      - { label: "L in stock", name: "L", widget: "boolean", default: true }
+                      - { label: "XL in stock", name: "XL", widget: "boolean", default: true }
+                      - { label: "XXL in stock", name: "XXL", widget: "boolean", default: true }
+
+  - name: "size_guide"
+    label: "Size Guide"
+    files:
+      - name: "guide"
+        label: "Size Guide"
+        file: "data/size-guide.json"
+        fields:
+          - { label: "Note (English)", name: "note_en", widget: "text" }
+          - { label: "Note (Arabic)", name: "note_ar", widget: "text" }
+          - label: "Size rows"
+            name: "rows"
+            widget: "list"
+            summary: "{{size}}"
+            fields:
+              - { label: "Size", name: "size", widget: "string" }
+              - { label: "Chest / Waist (cm)", name: "chest_waist", widget: "string" }
+              - { label: "Length (cm)", name: "length", widget: "string" }

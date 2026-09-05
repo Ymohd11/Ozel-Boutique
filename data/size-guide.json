@@ -1,0 +1,11 @@
+{
+  "note_en": "Measurements are in centimeters. If you're between sizes, we recommend sizing up.",
+  "note_ar": "المقاسات بالسنتيمتر. إذا كنت بين مقاسين، ننصح باختيار المقاس الأكبر.",
+  "rows": [
+    { "size": "S", "chest_waist": "74", "length": "43" },
+    { "size": "M", "chest_waist": "80", "length": "44" },
+    { "size": "L", "chest_waist": "86", "length": "45" },
+    { "size": "XL", "chest_waist": "92", "length": "46" },
+    { "size": "XXL", "chest_waist": "98", "length": "47" }
+  ]
+}
