@@ -5,8 +5,8 @@ backend:
 media_folder: "assets/products"
 public_folder: "/assets/products"
 
-site_url: https://YOUR-SITE-NAME.netlify.app
-display_url: https://YOUR-SITE-NAME.netlify.app
+site_url: https://friendly-unicorn-09f7a1.netlify.app
+display_url: https://friendly-unicorn-09f7a1.netlify.app
 
 collections:
   - name: "products"
